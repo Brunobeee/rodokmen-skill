@@ -25,13 +25,16 @@ P = {
  33: dict(n="otec neuveden", st="unk", f=[], note="Nemanželský syn; otec v matrice není."),
 }
 ```
-- `n` jméno (ženy rodným příjmením), `y` roky pro přehledy (`"* 1895"`, `"1890–1944"`, `"asi 1720–1785"`, `"1680 – před 1740"`).
+- `n` jméno (ženy rodným příjmením), `y` roky pro přehledy (`"* 1895"`, `"1890–1944"`, `"asi 1720–1785"`, `"1680 – před 1740"`,
+  `"† 1940"` když známe jen úmrtí; nic nevíme → `""`).
 - `f` fakta: začínají `*` (narození), `×` (sňatek), `†` (úmrtí) nebo jsou volný text (řemeslo, bydliště).
   Názvy obcí ve faktech používá mapa (`mista.json` → `re`).
-- `r` klíče zápisů ze `zaznamy.json`. `st` viz `matriky.md`.
+- `r` klíče zápisů ze `zaznamy.json`. `st` viz `matriky.md`: `doc` přečteno v matrice, `prob` pravděpodobné,
+  `fam` od rodiny (i strom, který si rodina vede sama, např. GEDCOM z jejího MyHeritage), `mh` cizí strom z internetu, `unk`.
 - `LINES = {8: ("Novákové", "Kováři z Holic…"), …}` – jen čísla 8–15; název rodu = příjmení v množném čísle.
 - `SIDE` – sourozenci a další příbuzní: `dict(k=<číslo předka>, n="Josef Novák (1865–1920)", t="text", r=[klíče])`.
-- `ISSUES` – `("Otázka", "Vyřešeno: … / Hypotéza: … / Otevřené: …")` → stránka „Co hledáme“ (vyřešené se skryjí).
+- `ISSUES` – dvojice `("Otázka", "Vyřešeno: … / Hypotéza: … / Otevřené: …")` → stránka „Co hledáme“ (vyřešené se skryjí).
+  Jde na web – nepiš sem citlivé věci (příčiny úmrtí, rodinné spory) bez souhlasu.
 - `HYPOTEZY` – `dict(rod=8, nadpis="…", text="…", polozky=[("jméno", "text")], zaznamy=[klíče])` → stránka rodu.
 - `SAME = {350: 140}` – předek, který je v rodokmenu dvakrát (alias → hlavní číslo; alias v `P` může mít `f=["TÁŽ OSOBA jako 140"]`).
 
@@ -62,7 +65,9 @@ Zapisuje `ramecek.py`. Rámeček má obepnout celý čtený zápis (ne jen jmén
 ## `mista.json`
 `{"Holice": {"re": "Holic", "dotaz": "Holice, Česko", "lat": 50.066, "lon": 15.986}}` – `re` je regulární výraz hledaný
 ve faktech osob (kmen slova, aby sedělo skloňování: „Holic“ najde Holice i v Holicích). Spravuje `mista.py`.
-Pozor na kolize (Hradec Králové × Nový Hradec Králové – použij `(?<!Nový )Hradec`). Hypotéza: `"hypoteza": true, "rod": 8`.
+Pozor na kolize (Hradec Králové × Nový Hradec Králové – použij `(?<!Nový )Hradec`; krátká jména jako `\bBuku?\b`).
+Hypotéza: `"hypoteza": true, "rod": 8`. Když OpenStreetMap obec nenajde („Žár“, malé osady), zkus třetí parametr – dotaz: `mista.py pridej "Žár" "Žár" "Žár, Zdíkov, okres Prachatice"`
+nebo dotaz s větší obcí či okresem.
 
 ## `dokumenty.json` – rodinné fotky a dokumenty na webu
 `[{"img": "foto_svatba_1919", "popis": "Svatba Jana a Josefy, Holice 1919.", "osoby": [8, 9]}]`
@@ -75,7 +80,9 @@ Viz `web.md`.
 - `research_log.md` – tabulka `| # | datum | zdroj | rozsah | hledáno | výsledek | citace |`, nové řádky na konec, i negativní.
   Web ji zobrazuje jako „Výzkumný deník“.
 - `zajimavosti.md` – `## Nadpis` + text, odkazy `[Jméno](/osoba/<slug>/)`.
-- `pribeh.md` – frontmatter `title`, `lead` + kapitoly; když soubor neexistuje, položka menu se skryje.
+- `pribeh.md` – „Příběh <hlavního rodu>“: frontmatter `title`, `lead` + kapitoly `##`; když soubor neexistuje,
+  položka menu se skryje. Jak psát: `pribehy.md`.
+- Poznámky pro Clauda v markdownu piš jako `<!-- … -->` – na web nejdou.
 - `archivni_dotazy.md`, `udaje_od_rodiny.md` – volný text.
 
 ## Odkazy na osoby (slug)

@@ -81,3 +81,14 @@ Mladší knihy jsou na matričním úřadě obce s rozšířenou působností / 
 - Stejný předek dvakrát v rodokmenu (vzdálení příbuzní se vzali) – v datech `SAME`.
 - Index nenašel ≠ zápis neexistuje. Zapiš, co přesně jsi prošel.
 - Pomocníci (subagenti) a OCR/AI čtou historické písmo chybně – vždy ověř sám (viz `playbook.md` §1 bod 10).
+
+## Technické pasti (macOS, zsh) – napiš je i pomocníkům do zadání
+- Shell je zsh: `for a in "x y z"; do set -- $a` slova nerozdělí (v zsh `${=a}`); `ls F*` bez shody = chyba
+  „no matches found“; `echo ====` je chyba (`=` na začátku slova). Složitější smyčky pouštěj přes `bash -c '…'`.
+- ImageMagick: seznam souborů předávej jako jednotlivé argumenty, ne jednou proměnnou s mezerami.
+  `-annotate` potřebuje písmo: `-font /System/Library/Fonts/Supplemental/Arial.ttf`.
+- Ověření čtení: `python3 -I tools/overit.py <snímek> x0,y0,x1,y1 pracovni/over [v]` – zápis rozdělený na dvě poloviny
+  zmenšené na 1900 px (dvoustrana je jinak nečitelná).
+- Výřez pro web (`vyrez.py`) dělej jen na **čtený zápis** (případně s hlavičkou sloupců), ne na celou dvoustranu –
+  na webu by byl nečitelně malý. Celá stránka je v `zdroje/` a na portálu přes odkaz.
+

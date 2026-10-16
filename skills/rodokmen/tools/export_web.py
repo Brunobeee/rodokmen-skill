@@ -57,6 +57,11 @@ def record_rows():
     return rows
 
 
+def strip_comments(md):
+    """Poznámky <!-- … --> v markdownu jsou pro Clauda, ne pro web."""
+    return re.sub(r"<!--.*?-->\n?", "", md, flags=re.S)
+
+
 def slugify(text):
     t = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode().lower()
     return re.sub(r"[^a-z0-9]+", "-", t).strip("-")
@@ -77,7 +82,11 @@ def years(y):
     approx = "≈" if re.match(r"^(asi|≈)", y) else ""
     if y.startswith("*"):
         return "* " + ys[0]
+    if y.startswith("†"):
+        return "† " + ys[0]
     if len(ys) == 1:
+        if re.match(r"^\?\s*[–-]", y):   # „? – 1940“ = známé jen úmrtí
+            return "?–" + ys[0]
         return approx + ys[0]
     tail = y.split("–")[-1]
     second = "?" if "před" in tail else ("≈" if re.search(r"(asi|≈)", tail) else "") + ys[-1]
@@ -305,7 +314,7 @@ def main():
     public_cfg["maPribeh"] = has_story
     site = dict(config=public_cfg, places=places, root=slugs[1], aliases={a: slugs[a] for a in SAME}, people=people,
                 families=families, records=records, lines=lines,
-                issues=[dict(title=t, text=x) for t, x in ISSUES], stats=stats, hypotheses=hypotheses,
+                issues=[dict(title=i, text="") if isinstance(i, str) else dict(title=i[0], text=i[1]) for i in ISSUES], stats=stats, hypotheses=hypotheses,
                 docs=[dict(img=d["img"], caption=d["popis"], people=[slugs[k] for k in d.get("osoby", []) if k in slugs])
                       for d in docs_cfg if os.path.exists(os.path.join(VYREZY, d["img"] + ".jpg"))])
 
@@ -314,9 +323,9 @@ def main():
     for src, dst in (("archivni_dotazy.md", "dotazy.md"), ("research_log.md", "denik.md"), ("zajimavosti.md", "zajimavosti.md")):
         path = os.path.join(DATA, src)
         text = open(path, encoding="utf-8").read() if os.path.exists(path) else ""
-        write(os.path.join(gen_dir, dst), re.sub(r"^# .*\n", "", text, count=1))
+        write(os.path.join(gen_dir, dst), strip_comments(re.sub(r"^# .*\n", "", text, count=1)))
     story = os.path.join(DATA, "pribeh.md")
-    write(os.path.join(gen_dir, "pribeh.md"), open(story, encoding="utf-8").read() if has_story else "---\ntitle: Příběh\nlead: ''\n---\n")
+    write(os.path.join(gen_dir, "pribeh.md"), strip_comments(open(story, encoding="utf-8").read()) if has_story else "---\ntitle: Příběh\nlead: ''\n---\n")
 
     hrefs = os.path.join(gen_dir, "fan_hrefs.json")
     json.dump({k: f"/osoba/{s}/" for k, s in slugs.items()}, open(hrefs, "w"))

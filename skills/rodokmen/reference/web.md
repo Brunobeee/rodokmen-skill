@@ -36,6 +36,9 @@ Náhled spouštěj na pozadí a uživateli pošli odkaz. Vzhled si ověř sám (
   jen její otisk (hash), u vlastního serveru v `nginx.conf`. Bez odpovědi je web otevřený všem (export to hlásí).
   Je to lehká ochrana proti náhodným návštěvníkům, ne bankovní zabezpečení – citlivé věci na web nepatří.
 - `uvod.foto` = klíč obrázku ve `vyrezy/` (ulož přes `vyrez.py`).
+- `pribeh`: `menu` a `tlacitko` pojmenuj podle hlavního rodu („Příběh Novákových“), `rod` = číslo rodu (8–15).
+  Bez vyplněného `uvod` ukáže úvodní stránka aspoň název a `lead` příběhu. Viz `pribehy.md`.
+- Šablona `web.json` je prázdná – název nastav hned, jak znáš příjmení výchozí osoby (`kontrola.py` hlásí zbytky ukázky).
 
 ## Zveřejnění na Netlify (výchozí, zdarma)
 1. Uživatel si založí účet na netlify.com (stačí přihlášení přes Google/GitHub) – udělá sám.

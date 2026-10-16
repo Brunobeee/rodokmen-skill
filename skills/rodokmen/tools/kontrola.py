@@ -92,6 +92,37 @@ def main():
     if not (cfg.get("prihlaseni") or {}).get("odpoved"):
         warn.append("web.json: není nastavená odpověď na přihlašovací otázku – web by byl otevřený komukoli")
 
+    if re.search(r"Novák|Petrovi", json.dumps(cfg, ensure_ascii=False)) and "Novák" not in P.get(1, {}).get("n", ""):
+        warn.append("web.json: jsou v něm ještě ukázkové texty (Novákovi) – nastav název, příběh a kontakt")
+
+    # Citlivé věci, které jdou na web: ISSUES („Co hledáme“), poznámky a fakta osob, boční příbuzní, texty.
+    citlive = re.compile(r"sebevra|vzal[a]? si život|oběsil|zastřelil[a]? se|utopil[a]? se|alkohol|vězen|kriminál|"
+                         r"rozvod|rozvedl|psychiatr|léčebn|duševn|rakovin|nemanželsk|cizoložst|dluh|exekuc|interrupc|potrat", re.I)
+
+    def recent(text):   # 20. století a později – staré matriční údaje (nemanželské dítě v 18. stol.) nevadí
+        return any(int(y) >= 1900 for y in re.findall(r"\b(19\d\d|20\d\d)\b", text))
+    texty = [("ISSUES", i if isinstance(i, str) else " ".join(i)) for i in ns.get("ISSUES", [])]
+    for k, p in P.items():
+        text = " ".join(p.get("f", [])) + " " + p.get("note", "")
+        roky = [int(y) for y in re.findall(r"\b1[5-9]\d\d|20\d\d\b", p.get("y", "") + " " + text)]
+        texty.append((f"osoba {k}", text + (" 1900" if roky and min(roky) >= 1870 or k < 8 else "")))
+    texty += [(f"boční příbuzný {s.get('n')}", s.get("n", "") + " " + s.get("t", "")) for s in SIDE]
+    for f in ("zajimavosti.md", "pribeh.md"):
+        if os.path.exists(os.path.join(DATA, f)):
+            texty += [(f, odst) for odst in open(os.path.join(DATA, f), encoding="utf-8").read().split("\n\n")]
+    for kde, text in texty:
+        m = citlive.search(text)
+        if m and recent(text):
+            warn.append(f"CITLIVÉ ({kde}): „…{text[max(0, m.start() - 40):m.end() + 40].strip()}…“ – jde na web; "
+                        f"zeptej se uživatele, jestli to tam smí být (reference/soukromi.md)")
+
+    if not os.path.exists(os.path.join(DATA, "pribeh.md")) and LINES:
+        hlavni = min(LINES)
+        n = max((k.bit_length() for k in P if k >= 8 and k >> (k.bit_length() - 4) == hlavni), default=0)
+        if n >= 6:
+            warn.append(f"rod {LINES[hlavni][0]} má už {n} generací – je čas napsat příběh rodu "
+                        f"(data/pribeh.md, reference/pribehy.md); koncept nejdřív ukaž uživateli v chatu")
+
     log = os.path.join(DATA, "research_log.md")
     rows = sum(1 for l in open(log, encoding="utf-8") if re.match(r"^\| \d+ \|", l)) if os.path.exists(log) else 0
     print(f"{len(P)} osob, {len(zaz)} zápisů, {len(svazky)} svazků, {rows} řádků deníku")

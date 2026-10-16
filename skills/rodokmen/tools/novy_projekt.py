@@ -39,7 +39,7 @@ def main():
     tools = os.path.join(dst, "tools")
     os.makedirs(tools, exist_ok=True)
     for f in os.listdir(os.path.join(SKILL, "tools")):
-        if f.endswith(".py") and f != "novy_projekt.py":
+        if f.endswith((".py", ".sh")) and f != "novy_projekt.py":
             shutil.copy2(os.path.join(SKILL, "tools", f), os.path.join(tools, f))   # nástroje vždy aktualizovat
     for d in ("vyrezy", "zdroje", "dokumenty", "pracovni"):
         os.makedirs(os.path.join(dst, d), exist_ok=True)

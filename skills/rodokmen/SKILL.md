@@ -1,6 +1,6 @@
 ---
 name: rodokmen
-description: Průvodce tvorbou rodokmenu z českých matrik a rodinného webu pro lidi bez zkušeností s genealogií i programováním. Použij, když chce uživatel začít nebo pokračovat v rodokmenu, hledat předky v matrikách (ARON, archivy), číst a přepisovat matriční zápisy, psát rodinný příběh nebo postavit a zveřejnit rodinný web s vějířem předků, mapou a zápisy. Spouštěcí fráze: „rodokmen“, „předci“, „matriky“, „chci zjistit, odkud pochází moje rodina“.
+description: Průvodce tvorbou rodokmenu z českých matrik a rodinného webu pro lidi bez zkušeností s genealogií i programováním. Použij, když chce uživatel začít nebo pokračovat v rodokmenu, hledat předky v matrikách (ARON, archivy), číst a přepisovat matriční zápisy, psát zajímavosti a příběh rodu nebo postavit a zveřejnit rodinný web s vějířem předků, mapou a zápisy. Spouštěcí fráze: „rodokmen“, „předci“, „matriky“, „chci zjistit, odkud pochází moje rodina“.
 ---
 
 # Rodokmen z matrik + rodinný web
@@ -19,6 +19,8 @@ Najdeš v ní `tools/` (nástroje), `template/` (šablona projektu a webu) a `re
 - Radost z objevu je důležitá: když najdeš něco zajímavého (řemeslo, nemanželské dítě, epidemie, svatba
   „na poslední chvíli“, předek z 17. století), řekni to jako příběh, ne jako tabulku.
 - Buď poctivý: „nenašel jsem“ a „nejsem si jistý“ jsou plnohodnotné výsledky.
+- Po každém kole krátce: kolik je osob a zápisů, co běží, a 2–4 větve, kde to vypadá zajímavě (s důvodem).
+- Dnešní datum (do deníku, STAV.md) ber z příkazu `date`, ne z hlavy.
 
 ## Na začátku každé konverzace
 1. Jsi ve složce projektu? (`data/STAV.md` existuje.) → Přečti `data/STAV.md`, konec `data/research_log.md`
@@ -36,7 +38,8 @@ Najdeš v ní `tools/` (nástroje), `template/` (šablona projektu a webu) a `re
    pak `cd web && npm install && npm run nahled` a pošli mu odkaz http://localhost:4321.
 3. V projektu `git init` a první uložení (git = historie změn, kdyby se něco pokazilo). Doporuč pokračovat v Claude Code
    **z této složky** (soubor `CLAUDE.md` v ní zajistí, že příště navážeš).
-4. Vyplň v `data/STAV.md` sekci „Pro koho“.
+4. Vyplň v `data/STAV.md` sekci „Pro koho“ a v `data/web.json` název webu („Rodokmen Novákových“),
+   jakmile znáš příjmení výchozí osoby (šablona je prázdná).
 
 ## Fáze 1 – Rozhovor s rodinou (nejcennější hodina celého projektu)
 Cíl: znát co nejvíc o 3–4 generacích nazpět, než sáhneš do matrik.
@@ -47,19 +50,28 @@ Cíl: znát co nejvíc o 3–4 generacích nazpět, než sáhneš do matrik.
 - Doporuč zeptat se nejstarších žijících příbuzných – teď, dokud to jde. Nabídni seznam otázek.
 - Vše zapiš: `data/udaje_od_rodiny.md` (kdo co řekl), osoby do `data/osoby.py` se stavem `fam`
   (formát v hlavičce souboru a v `reference/data.md`). Žijící lidé jen jméno a rok narození.
-- Cizí stromy z internetu (MyHeritage, Geni, FamilySearch) jsou **jen vodítko** – stav `mh`, nikdy `doc`.
+- **Rodinný strom jako soubor GEDCOM** (`.ged`, export z MyHeritage/Geni/FamilySearch): `python3 -I tools/ged_import.py
+  dokumenty/strom.ged "Jméno Příjmení"` vypíše předky s čísly, všechny události a poznámky a **frontu zápisů**
+  (nejmladší známá událost u každého předka, a jestli už je v archivu). `--osoby` dá kostru pro `osoby.py`.
+  Poznámky ve stromu bývají plné rodinných historek. Přečti je a vytěž do `udaje_od_rodiny.md`.
+- Strom, který si rodina vede sama, má stav `fam`. Cizí stromy z internetu (stromy jiných lidí na MyHeritage, Geni,
+  FamilySearch) jsou **jen vodítko**, stav `mh`, nikdy `doc`.
 
 ## Fáze 2 – Matriky, generace po generaci
 Podrobný postup čtení: `reference/matriky.md`. Portály archivů: `reference/portaly.md`. Metodika: `reference/playbook.md` (EN).
 
 Základní smyčka pro každou osobu:
-1. **Vyber cíl**: nejmladší předek, u kterého chybí doklad. Nejlepší první cíl je sňatek – uvádí rodiče obou snoubenců
-   a jejich bydliště, takže otevírá další generaci.
+1. **Vyber cíl a začni od nejmladšího zápisu.** Vezmi nejmladšího předka bez dokladu a hledej jeho **nejmladší
+   známou událost**: úmrtí (online po 30 letech; ve 20. století uvádí datum a místo narození i rodiče), pak sňatek
+   (uvádí rodiče a bydliště obou snoubenců, otevírá další generaci), a teprve z nich křest. **Nikdy nehledej křest
+   naslepo** po stovkách snímků bez rejstříku, když je známé úmrtí nebo sňatek. (Skutečná chyba: křest ve velkoměstě
+   hledaný naslepo, přitom datum a místo úmrtí byly známé.)
 2. **Ověř přístupnost**: matriky jsou v archivu až po uplynutí lhůty od *posledního* zápisu ve svazku
    (narození 100 let, sňatky 75, úmrtí 30). Mladší údaje jsou na matričním úřadě (žádost s doložením příbuzenství) –
    zapiš do `data/archivni_dotazy.md` a jdi dál.
-3. **Najdi svazek**: podle obce → farnost → archiv. ARON: `python3 -I tools/aron_search.py "Obec"`.
-   Ostatní archivy viz `reference/portaly.md`. Je-li ke svazku index (rejstřík), začni jím.
+3. **Najdi svazek**: podle obce → farnost → archiv. ARON: `python3 -I tools/aron_search.py "Obec"`, SOA Třeboň:
+   `tools/trebon.py`, Praha: `tools/ahmp_search.sh`; ostatní a Rakousko viz `reference/portaly.md`.
+   Je-li ke svazku index (rejstřík), začni jím. Starší matriky (před ~1784) bývají ve faře sousedního města.
 4. **Stáhni snímek** do `pracovni/`, najdi zápis, **přečti ho sám ze snímku** (přiblíž si výřez v plném rozlišení).
 5. **Zapiš nález** (vždy všech 6 kroků, i když to zdržuje):
    1. svazek do `data/svazky.json` (ARON: `python3 -I tools/aron_img.py <apu> svazek`),
@@ -78,28 +90,38 @@ Pravidla, která chrání kvalitu (naučená na skutečném projektu):
 - **Nic nedomýšlej.** Nejisté čtení „(?)“, rozpory zapiš do `ISSUES`. Písaři se pletli (jména sourozenců, věk, Anna/Františka).
 - **Čti celý zápis včetně okrajů** – pozdější poznámky o úmrtí, sňatku, legitimaci bývají nejcennější.
 - **Rodina přes čísla domů**: stejné číslo popisné a řemeslo přes generace je silná stopa; v knize hledej celé domácnosti.
+- **Ztotožnění míst ověř** podle panství/kraje v zápisu (německé „Langenau“ je v Čechách několikrát – rozhodne „bey Hohenelbe“ = u Vrchlabí).
+- **U úředníků, vojáků, lékařů, učitelů, farářů** zkus noviny a ročenky (`reference/portaly.md` → Noviny): ukážou
+  kariéru, tedy kde člověk kdy žil, a dají výstřižky na web. U sedláků a řemeslníků na vsi se nevyplatí.
 - Matriky před ~1650 skoro nejsou. Pro 17. století: soupis poddaných 1651, berní rula 1654, gruntovní knihy (`reference/portaly.md`).
 - Najdeš-li **spornou věc**, kterou nerozhodneš (dvě možná čtení, dva kandidáti), napiš to uživateli s výřezem
   a nech ho rozhodnout; do té doby `prob`.
 
 ### Pomocníci (subagenti) – šetrně
 Na velké kolo (např. „projdi 5 svazků a najdi všechny Nováky“) můžeš pustit 2–4 pomocníky paralelně.
-Každému dej přesné zadání (svazek, snímky, koho hledat, kam uložit snímky, formát výsledku) a pravidla výše.
-**Jejich čtení vždy ověř sám na snímku**, než ho zapíšeš jako `doc`. Pomocníci stojí hodně kreditů –
-před velkým kolem řekni uživateli, co plánuješ a proč, a nech si to schválit.
+Každému dej přesné zadání (svazek, snímky, koho hledat, formát výsledku: klíč, snímek, souřadnice zápisu, přepis)
+a pravidla výše. Pomocník píše jen do `pracovni/pom_<větev>/`, **do `data/` nikdy**. Zapisuješ ty.
+**Jejich čtení vždy ověř sám na snímku** (`python3 -I tools/overit.py <snímek> x0,y0,x1,y1 pracovni/over` rozdělí zápis
+na dvě čitelné poloviny), než ho zapíšeš jako `doc`. Uživateli to vysvětli správně: pomocníci nečtou hůř, je to stejný
+model. Jde o princip čtyř očí a pomocník nemá kontext (dvě rodiny stejného jména ve vsi, dva Janové na statku).
+Prohlížeč může mít najednou jen jeden pomocník, proto dávej přednost nástrojům bez prohlížeče.
+Osvědčilo se 3–4 pomocníci na různé větve a archivy současně, jedno kolo ≈ 15–25 nových předků.
+Pomocníci stojí hodně kreditů – před velkým kolem řekni uživateli, co plánuješ a proč, a nech si to schválit.
+Do zadání jim napiš technické pasti z `reference/matriky.md` (zsh, ImageMagick).
 
 ### Kdy přestat
 Linie končí, když matriky mlčí (nemanželské dítě bez otce, shořelé knihy, chybějící svazky) nebo když jsi
 v 17. století. Zapiš to do `ISSUES`/`archivni_dotazy.md` a jdi na jinou větev. Průběžně aktualizuj `data/STAV.md`
 („Rozpracováno“), aby šlo kdykoli navázat.
 
-## Fáze 3 – Příběhy a zajímavosti
-Průběžně (ne až na konci) sbírej do `data/zajimavosti.md`: nejstarší předek, řemesla, předci v rodokmenu vícekrát
-(`SAME`), nemanželské děti, svatby krátce před porodem, epidemie (cholera 1866!), vojáci, přestěhování, dlouhověkost.
-Až je hotová hlavní linie, napiš s uživatelem `data/pribeh.md` – příběh rodu (frontmatter `title`, `lead`, pak kapitoly `##`).
-Styl: konkrétní, s daty a místy, krátké odstavce, odkazy na osoby `[Jan Novák](/osoba/<slug>/)`
-(slug najdeš ve `web/src/data/site.json`). Žádné vymýšlení – co nevíme, označ jako domněnku.
-Úvod webu (lákadlo, 2–4 karty zajímavostí, fotka) se nastavuje v `data/web.json` (`reference/web.md`).
+## Fáze 3 – Zajímavosti a Příběh hlavního rodu
+Podrobně `reference/pribehy.md`. Tohle je to, co rodina na webu čte nejradši, takže na to nezapomínej a nenechávej to na konec.
+- **Zajímavosti** („fun facts“) sbírej **průběžně**: co najdeš při čtení, hned zapiš do `data/zajimavosti.md`
+  a řekni uživateli. Po každém kole spusť `python3 -I tools/napady.py`. Najde v datech svatby krátce před porodem,
+  rod v jednom domě, sňatky příbuzných, dlouhověkost, epidemie… Ověř a napiš jako krátké příběhy.
+- **„Příběh <hlavního rodu>“** (Příběh Novákových): jakmile má hlavní rod ~5 doložených generací, nabídni ho.
+  Koncept napiš **do chatu** ke schválení, pak `data/pribeh.md` a v `web.json` menu, tlačítko a úvod.
+  Je hlavní věcí na úvodní stránce webu.
 
 ## Fáze 4 – Web
 Podrobně `reference/web.md`. Ve zkratce:
@@ -107,6 +129,7 @@ Podrobně `reference/web.md`. Ve zkratce:
 2. Nastav `data/web.json`: název, úvod, kontakt a **přihlašovací otázku a odpověď** (web je jen pro rodinu).
 3. Po každé změně dat: `npm run data && npm run build` (nebo znovu `npm run nahled`).
 4. Před zveřejněním si vezmi `reference/soukromi.md` a projdi s uživatelem, co na webu bude (žijící lidé!).
+   Na web jde i „Co hledáme“ (`ISSUES`), poznámky osob a deník. Hlášky `CITLIVÉ` z `kontrola.py` vyřeš s uživatelem.
 
 ## Fáze 5 – Zveřejnění (volitelné, jen se souhlasem)
 Výchozí cesta je **Netlify** (zdarma): `npm run nasadit`. Přihlášení k Netlify a první propojení webu jsou interaktivní –
@@ -140,9 +163,16 @@ Nic nezveřejňuj bez výslovného souhlasu uživatele.
 |---|---|
 | `aron_search.py "Obec"` | najde svazky matrik na ARON (SOA Zámrsk) |
 | `aron_img.py <apu> info / <snímek> 1 pracovni/x.jpg / link <n> / svazek` | stáhne snímek, dá odkaz, zapíše svazek |
+| `trebon.py misto / svazky / rejstrik / snimek / svazek` | matriky SOA Třeboň (jižní Čechy) bez prohlížeče, i rejstříky |
+| `ahmp_search.sh "dotaz"`, `ahmp_scan.py XID snímek out.jpg` | matriky Prahy (AHMP) |
+| `matricula_dl.sh`, `matricula_batch.sh` | snímky z Matriculy (Rakousko…), URL se bere z prohlížeče |
+| `anno.py`, `anno_snap.py`, `kramerius.py` | noviny: ANNO (rakouské), Kramerius (české) |
+| `ged_import.py strom.ged "Jméno"` | předci z rodinného stromu (GEDCOM) + fronta zápisů |
+| `overit.py <snímek> x0,y0,x1,y1 <prefix>` | zápis na dvě čitelné poloviny – ověření čtení |
+| `napady.py` | náměty na zajímavosti z dat |
 | `vyrez.py <stránka.jpg> <klíč> x0,y0,x1,y1` | výřez do `zdroje/` a `vyrezy/` |
 | `ramecek.py <klíč> x0,y0,x1,y1` | rámeček čteného místa + kontrolní obrázek |
 | `mista.py pridej "Obec"` / `mista.py` | místa pro mapu (souřadnice z OpenStreetMap) |
-| `kontrola.py` | kontrola konzistence dat |
+| `kontrola.py` | kontrola dat; hlásí i citlivé údaje na webu a kdy psát příběh |
 | `export_web.py` | data → web (volá ho `npm run data`) |
 | `fan_chart.py vystupy/` | vějíř předků jako plakát k tisku |

@@ -52,7 +52,7 @@ s vymyšlenou rodinou a spustí náhled.
 | 0. Příprava | potvrdíte instalaci programů | založí projekt |
 | 1. Rozhovor | vyprávíte, dodáte dokumenty, zeptáte se příbuzných | zapisuje, čte dokumenty, navrhuje otázky |
 | 2. Matriky | rozhodujete sporná místa | hledá svazky, stahuje a čte zápisy, dělá výřezy, přepisy a překlady, vede deník hledání |
-| 3. Příběhy | doplníte rodinné historky, schválíte texty | sepisuje zajímavosti a příběh rodu |
+| 3. Příběhy | doplníte rodinné historky, schválíte texty | průběžně sbírá zajímavosti, napíše „Příběh <vašeho rodu>“ |
 | 4. Web | díváte se a říkáte, co upravit | staví web a ukazuje náhled |
 | 5. Zveřejnění | založíte účet na Netlify, schválíte obsah | nasadí web s přihlášením rodinnou otázkou |
 
@@ -71,9 +71,14 @@ skills/rodokmen/
 ```
 
 ## Co umí a co ne
-- **Východní Čechy (SOA Zámrsk, portál ARON)** mají hotové nástroje: hledání svazků, stažení snímku, odkazy.
-- Ostatní archivy (Praha, Plzeň, Třeboň, Litoměřice, Brno, Opava) Claude obsluhuje obecným postupem přes prohlížeč.
+- **Hotové nástroje** (bez prohlížeče) mají: východní Čechy (SOA Zámrsk, ARON), jižní Čechy (SOA Třeboň,
+  včetně dobrovolnických rejstříků) a Prahu (AHMP). Pro Rakousko je postup přes Matriculu.
+- Ostatní archivy (Plzeň, Litoměřice, Brno, Opava) Claude obsluhuje obecným postupem přes prohlížeč.
   Funguje to, ale je to pomalejší.
+- U úředníků, vojáků a lékařů hledá i v **dobových novinách** (ANNO, Kramerius) – kariéra, vyznamenání, parte.
+- Umí načíst **rodinný strom z MyHeritage** a dalších služeb (export GEDCOM) a udělat z něj plán hledání.
+- Průběžně sbírá **zajímavosti** (svatby na poslední chvíli, rod sto let v jednom domě…) a s vámi napíše
+  **Příběh vašeho rodu** – hlavní článek webu.
 - Claude čte staré písmo dobře, ale ne bezchybně. Proto ke každému zápisu ukládá výřez s vyznačeným místem,
   aby se to dalo zkontrolovat, a nejistá místa označuje otazníkem.
 - Placené služby (MyHeritage, Ancestry) Claude hromadně neprochází – vede to k zablokování účtu.
