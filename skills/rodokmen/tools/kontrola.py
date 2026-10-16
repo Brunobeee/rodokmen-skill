@@ -1,0 +1,108 @@
+#!/usr/bin/env python3
+"""Kontrola konzistence dat rodokmenu. Spouštějte po každé větší změně a před stavbou webu.
+
+Použití: kontrola.py
+Vypíše CHYBY (rozbijí web nebo jsou věcně špatně) a UPOZORNĚNÍ (něco chybí, doplnit).
+Návratový kód 1, pokud jsou chyby.
+"""
+import json, os, re, sys
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+DATA = os.path.join(ROOT, "data")
+
+
+def jload(name, default):
+    p = os.path.join(DATA, name)
+    return json.load(open(p, encoding="utf-8")) if os.path.exists(p) else default
+
+
+def main():
+    err, warn = [], []
+    ns = {}
+    try:
+        exec(open(os.path.join(DATA, "osoby.py"), encoding="utf-8").read(), ns)
+    except Exception as e:  # noqa: BLE001
+        sys.exit(f"CHYBA: data/osoby.py nejde načíst: {e}")
+    P, SIDE, LINES, SAME = ns.get("P", {}), ns.get("SIDE", []), ns.get("LINES", {}), ns.get("SAME", {})
+    zaz = jload("zaznamy.json", [])
+    svazky, prep, hl = jload("svazky.json", {}), jload("prepisy.json", {}), jload("zvyrazneni.json", {})
+    keys = [z.get("klic") for z in zaz]
+    dup = {k for k in keys if keys.count(k) > 1}
+    if dup:
+        err.append(f"zápisy se stejným klíčem: {sorted(dup)}")
+    keys = set(keys)
+
+    if 1 not in P:
+        err.append("chybí osoba 1 (výchozí osoba rodokmenu)")
+    for k, p in P.items():
+        if not isinstance(k, int) or k < 1:
+            err.append(f"osoba {k!r}: číslo musí být kladné celé číslo")
+            continue
+        if k > 1 and k // 2 not in P and k not in SAME:
+            warn.append(f"osoba {k} ({p.get('n')}): v rodokmenu chybí její dítě {k // 2} – je číslo správně?")
+        st = p.get("st", "unk")
+        if st not in ("doc", "prob", "fam", "mh", "unk"):
+            err.append(f"osoba {k}: neznámý stav '{st}'")
+        for r in p.get("r", []):
+            if r not in keys:
+                err.append(f"osoba {k} ({p.get('n')}) cituje neexistující zápis '{r}'")
+        if st == "doc" and not p.get("r"):
+            warn.append(f"osoba {k} ({p.get('n')}) je 'doc' (doloženo), ale necituje žádný zápis")
+    for s in SIDE:
+        if s.get("k") not in P:
+            err.append(f"boční příbuzný '{s.get('n')}' patří k neexistující osobě {s.get('k')}")
+        for r in s.get("r", []):
+            if r not in keys:
+                err.append(f"boční příbuzný '{s.get('n')}' cituje neexistující zápis '{r}'")
+    for a, c in SAME.items():
+        if c not in P:
+            err.append(f"SAME: {a} -> {c}, ale osoba {c} neexistuje")
+    for k in LINES:
+        if k not in range(8, 16):
+            err.append(f"LINES: rod {k} – rody mají čísla 8 až 15 (pradědečci a prababičky)")
+
+    cited = {r for p in P.values() for r in p.get("r", [])} | {r for s in SIDE for r in s.get("r", [])}
+    for z in zaz:
+        k = z.get("klic", "?")
+        for f in ("klic", "druh", "datum", "nazev", "shrnuti"):
+            if not z.get(f):
+                err.append(f"zápis {k}: chybí pole '{f}'")
+        if z.get("svazek") and z["svazek"] not in svazky:
+            err.append(f"zápis {k}: svazek '{z['svazek']}' není v data/svazky.json")
+        if not z.get("odkaz") and not svazky.get(z.get("svazek", ""), {}).get("url"):
+            warn.append(f"zápis {k}: chybí odkaz na snímek (pole 'odkaz')")
+        if not os.path.exists(os.path.join(ROOT, "vyrezy", k + ".jpg")):
+            warn.append(f"zápis {k}: chybí výřez vyrezy/{k}.jpg")
+        elif k not in hl:
+            warn.append(f"zápis {k}: chybí rámeček (tools/ramecek.py)")
+        if k not in prep:
+            warn.append(f"zápis {k}: chybí přepis a překlad v data/prepisy.json")
+        if k not in cited:
+            warn.append(f"zápis {k}: necituje ho žádná osoba (doplnit do 'r' u osoby nebo bočního příbuzného)")
+
+    for name, e in jload("mista.json", {}).items():
+        if "lat" not in e:
+            warn.append(f"místo {name}: nemá souřadnice (spusťte tools/mista.py)")
+        try:
+            re.compile(e.get("re") or "")
+        except re.error as ex:
+            err.append(f"místo {name}: špatný výraz '{e.get('re')}': {ex}")
+
+    cfg = jload("web.json", {})
+    if not (cfg.get("prihlaseni") or {}).get("odpoved"):
+        warn.append("web.json: není nastavená odpověď na přihlašovací otázku – web by byl otevřený komukoli")
+
+    log = os.path.join(DATA, "research_log.md")
+    rows = sum(1 for l in open(log, encoding="utf-8") if re.match(r"^\| \d+ \|", l)) if os.path.exists(log) else 0
+    print(f"{len(P)} osob, {len(zaz)} zápisů, {len(svazky)} svazků, {rows} řádků deníku")
+    for e in err:
+        print("CHYBA:", e)
+    for w in warn:
+        print("upozornění:", w)
+    if not err and not warn:
+        print("Vše v pořádku.")
+    sys.exit(1 if err else 0)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,37 @@
+{
+ "nazev": "Rodokmen Novákových",
+ "popis": "Rodokmen rodu Nováků a příbuzných rodin, dohledaný v matrikách.",
+ "zapati": "Dohledáno v digitalizovaných matrikách státních oblastních archivů",
+ "kontakt": {
+  "jmeno": "Petrovi",
+  "email": ""
+ },
+ "prihlaseni": {
+  "uvod": "Tenhle web je jen pro rodinu a příbuzné.",
+  "otazka": "Jaké řemeslo měli Novákové z Holic? (ukázka – odpověď: kovář)",
+  "odpoved": "kovář"
+ },
+ "uvod": {
+  "nadpis": "Čtyři generace kovářů z Holic",
+  "odstavce": [
+   "Ukázkový text: kovárna v domě čp. 112 přecházela z otce na syna od poloviny 19. století.",
+   "Tady bude lákadlo na váš rodinný příběh – dvě tři věty, které čtenáře chytí."
+  ],
+  "foto": "",
+  "foto_popis": ""
+ },
+ "pribeh": {
+  "menu": "Příběh Nováků",
+  "rod": 8
+ },
+ "zajimavosti_na_uvodu": [
+  {
+   "nadpis": "Nejstarší doložený předek",
+   "text": "Kovář Jan Novák, asi 1825."
+  },
+  {
+   "nadpis": "Svatba po válce",
+   "text": "Jan a Josefa se vzali v červnu 1919."
+  }
+ ]
+}

@@ -1,0 +1,19 @@
+{
+ "nazev": "Rodokmen Novákových",
+ "popis": "Rodokmen rodu Nováků a příbuzných rodin, dohledaný v matrikách.",
+ "zapati": "Dohledáno v digitalizovaných matrikách státních oblastních archivů",
+ "kontakt": {"jmeno": "Petrovi", "email": ""},
+ "prihlaseni": {
+  "uvod": "Tenhle web je jen pro rodinu a příbuzné.",
+  "otazka": "Rodinná otázka, na kterou zná odpověď jen rodina",
+  "odpoved": ""
+ },
+ "uvod": {
+  "nadpis": "",
+  "odstavce": [],
+  "foto": "",
+  "foto_popis": ""
+ },
+ "pribeh": {"menu": "Příběh Nováků", "rod": 8},
+ "zajimavosti_na_uvodu": []
+}

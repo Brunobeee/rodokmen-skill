@@ -1,0 +1,7 @@
+{
+ "Holice": {"re": "Holic", "dotaz": "Holice, Česko", "lat": 50.066, "lon": 15.986},
+ "Dolní Roveň": {"re": "Dolní Rov", "dotaz": "Dolní Roveň, Česko", "lat": 50.029, "lon": 15.966},
+ "Ostřetín": {"re": "Ostřetín", "dotaz": "Ostřetín, Česko", "lat": 50.04, "lon": 16.03},
+ "Chrudim": {"re": "Chrudim", "dotaz": "Chrudim, Česko", "lat": 49.951, "lon": 15.795},
+ "Pardubice": {"re": "Pardubic", "dotaz": "Pardubice, Česko", "lat": 50.038, "lon": 15.779}
+}

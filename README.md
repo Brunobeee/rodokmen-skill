@@ -1,0 +1,84 @@
+# Rodokmen – skill pro Claude Code
+
+Claude vás provede tvorbou rodokmenu **od rodinných vzpomínek přes digitalizované matriky až k hezkému rodinnému webu**
+s vějířem předků, mapou, příběhem rodu a výřezy původních zápisů s přepisem a překladem.
+Je určený pro lidi, kteří genealogii nikdy nedělali a neprogramují – technickou práci dělá Claude, vy dodáváte
+znalost rodiny a rozhodujete.
+
+Vznikl při skutečném hledání předků jedné rodiny (243 předků, 11 generací, 192 matričních zápisů za dva dny).
+
+## Co budete potřebovat
+- **Claude Code** (aplikace pro Mac/Windows nebo příkazová řádka) a předplatné Claude (Pro/Max). Rodokmen je
+  dlouhá práce – počítejte s několika večery a s tím, že spotřebuje dost kreditů.
+- **Počítač s macOS** (vyzkoušeno). Windows a Linux by měly fungovat, ale vyzkoušené nejsou.
+- Programy **Python 3, Node.js, ImageMagick a git**. Nemusíte je instalovat předem – Claude zkontroluje, co chybí,
+  a pomůže s instalací (na Macu přes [Homebrew](https://brew.sh)).
+- Volitelně účet na [Netlify](https://www.netlify.com) (zdarma), pokud chcete web zveřejnit pro rodinu.
+
+## Instalace
+
+### Varianta A – jako plugin (doporučeno)
+V Claude Code napište:
+```
+/plugin marketplace add sarsonj/rodokmen-skill
+/plugin install rodokmen@rodokmen-skill
+```
+Aktualizace později: `/plugin marketplace update rodokmen-skill`.
+
+### Varianta B – ručně
+Stáhněte repozitář (zelené tlačítko **Code → Download ZIP** na GitHubu, nebo `git clone`) a zkopírujte složku
+`skills/rodokmen` do `~/.claude/skills/` (na Windows `C:\Users\<jméno>\.claude\skills\`). Výsledek:
+`~/.claude/skills/rodokmen/SKILL.md`.
+
+Pak Claude Code restartujte.
+
+## První spuštění
+1. Spusťte Claude Code (klidně v domovské složce) a napište třeba:
+   > Chci udělat rodokmen své rodiny.
+
+   nebo přímo `/rodokmen`.
+2. Claude zkontroluje programy, založí složku projektu (např. `~/Rodokmen`) a začne se ptát na rodinu.
+   Připravte si, co víte o rodičích, prarodičích a pradědečcích, a rodinné dokumenty (rodné a oddací listy, parte,
+   fotky, kroniky) – stačí vyfotit mobilem.
+3. **Příště otevírejte Claude Code přímo ve složce projektu** (`cd ~/Rodokmen && claude`, nebo v aplikaci
+   vyberte tuto složku). Claude si přečte, kde jste skončili, a naváže.
+
+Chcete nejdřív vidět, jak web vypadá? Řekněte: *„Ukaž mi ukázkový web.“* Claude založí ukázkový projekt
+s vymyšlenou rodinou a spustí náhled.
+
+## Jak to probíhá
+| Fáze | Co děláte vy | Co dělá Claude |
+|---|---|---|
+| 0. Příprava | potvrdíte instalaci programů | založí projekt |
+| 1. Rozhovor | vyprávíte, dodáte dokumenty, zeptáte se příbuzných | zapisuje, čte dokumenty, navrhuje otázky |
+| 2. Matriky | rozhodujete sporná místa | hledá svazky, stahuje a čte zápisy, dělá výřezy, přepisy a překlady, vede deník hledání |
+| 3. Příběhy | doplníte rodinné historky, schválíte texty | sepisuje zajímavosti a příběh rodu |
+| 4. Web | díváte se a říkáte, co upravit | staví web a ukazuje náhled |
+| 5. Zveřejnění | založíte účet na Netlify, schválíte obsah | nasadí web s přihlášením rodinnou otázkou |
+
+Matriky jsou online jen do určitého data: narození starší než 100 let, sňatky 75 a úmrtí 30 let.
+O mladší údaje se žádá na matričním úřadě. Claude vám řekne, kdy to je potřeba.
+
+## Co je v repozitáři
+```
+skills/rodokmen/
+  SKILL.md           průvodce pro Clauda (fáze, pravidla)
+  reference/         podrobné návody: čtení matrik, portály archivů, formát dat, web, soukromí,
+                     metodická příručka (playbook, anglicky)
+  tools/             nástroje v Pythonu (ARON, výřezy, rámečky, mapa, kontrola dat, export do webu, vějíř)
+  template/          šablona projektu: prázdná data, ukázková rodina, web (Astro)
+.claude-plugin/      instalace jako plugin
+```
+
+## Co umí a co ne
+- **Východní Čechy (SOA Zámrsk, portál ARON)** mají hotové nástroje: hledání svazků, stažení snímku, odkazy.
+- Ostatní archivy (Praha, Plzeň, Třeboň, Litoměřice, Brno, Opava) Claude obsluhuje obecným postupem přes prohlížeč.
+  Funguje to, ale je to pomalejší.
+- Claude čte staré písmo dobře, ale ne bezchybně. Proto ke každému zápisu ukládá výřez s vyznačeným místem,
+  aby se to dalo zkontrolovat, a nejistá místa označuje otazníkem.
+- Placené služby (MyHeritage, Ancestry) Claude hromadně neprochází – vede to k zablokování účtu.
+
+## Soukromí
+Projekt obsahuje osobní údaje vaší rodiny. Zůstává na vašem počítači. Web je chráněný rodinnou otázkou
+a není indexovaný vyhledávači. Žijící lidé jsou na něm jen se jménem a rokem narození.
+Pokud projekt chcete zálohovat na GitHub, použijte **soukromý** repozitář.

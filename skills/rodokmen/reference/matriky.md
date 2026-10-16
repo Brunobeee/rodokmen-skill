@@ -1,0 +1,83 @@
+# Jak číst matriky – praktický návod
+
+## Druhy knih
+| Zkratka | Kniha | Co v ní je | Proč je cenná |
+|---|---|---|---|
+| **N** | narození (křty), *Liber natorum / baptisatorum*, *Geburtsbuch* | datum narození a křtu, dům (čp.), dítě, rodiče (od ~1784 i jejich rodiče a bydliště), kmotři, porodní bába | pohlaví, legitimita, rodiče matky → další generace |
+| **O** | oddaní (sňatky), *Liber copulatorum*, *Trauungsbuch* | datum, dům, ženich a nevěsta (věk, stav, náboženství), jejich rodiče, svědci | **nejlepší první cíl** – otevírá dvě rodiny naráz |
+| **Z** | zemřelí, *Liber defunctorum*, *Sterbebuch* | datum úmrtí a pohřbu, dům, jméno, věk, příčina | věk → odhad roku narození, stav (vdova po…) |
+| **I** | index (rejstřík) k N/O/Z | jméno → datum / strana | rychlé hledání; **index bývá neúplný**, negativní výsledek v indexu nic nedokazuje |
+
+Další prameny: sčítání lidu (1857–1921; domácnosti s daty narození), soupis poddaných 1651 (celé rodiny s věkem),
+berní rula 1654 (jen hospodáři), gruntovní/pozemkové knihy (kdo vlastnil který dům – propojí generace přes dům),
+vojenské záznamy, domovské listy, parte. Viz `portaly.md` a `playbook.md` §2.
+
+## Lhůty (zákon 301/2000 Sb.)
+Do archivu (a tedy online) jde svazek, až od jeho **posledního** zápisu uplyne: narození **100 let**, sňatky **75**, úmrtí **30**.
+Mladší knihy jsou na matričním úřadě obce s rozšířenou působností / pověřeném úřadě – výpis dostane přímý příbuzný
+(žádost + doklady o příbuzenství). Zapiš do `archivni_dotazy.md`.
+
+## Jak vypadá hledání v praxi
+1. **Obec → farnost.** Malé vesnice patřily k faře v sousední obci; popis svazku vyjmenovává všechny obce farnosti.
+   Hledej obec v popisu svazku (`aron_search.py "Obec"`), ne jen v názvu.
+2. **Svazek podle roku a druhu.** Pozor na překryvy: jedna kniha pro více obcí, „duplikáty“, zvláštní knihy pro jednotlivé obce.
+3. **Index, pak kniha.** Index řazený po písmenech a letech dá stránku/folio; snímek odhadni (snímek ≈ folio × 1 až 2) a dolaď.
+4. **Bez indexu: listuj chronologicky.** Odhadni pozici podle let na prvních a posledních snímcích svazku (půlení intervalu).
+5. **Přečti celý zápis**, pak se podívej i na okolí (dvojčata, další děti stejných rodičů).
+
+## Čtení písma
+- Do ~1780 latina nebo čeština, pak hodně němčina (kurent), od ~1860 často čeština, ve 20. století čeština.
+- Česká jména v němčině/latině: Johann/Joannes = Jan, Wenzel/Wenceslaus = Václav, Joseph = Josef, Franz/Franciscus = František,
+  Maria = Marie, Anna, Katharina = Kateřina, Barbara = Barbora, Magdalena = Majdalena/Magdaléna, Theresia = Terezie,
+  Ludmilla = Lidmila, Dorothea = Dorota, Apollonia = Apolena, Georg/Georgius = Jiří, Matthias = Matěj, Adalbert = Vojtěch.
+- Příjmení se píše foneticky a mění se (Šaršon/Scharschon/Šaršoun, Kroupa/Kraupa). Hledej všechny varianty.
+- Ženská příjmení v němčině bez „-ová“ (Maria Novak = Marie Nováková).
+- Kurent: dlouhé „ſ“ vypadá jako „f“, „e“ jako „n“, „h“ s kličkou dolů. Při nejistotě porovnej se stejným písmenem
+  jinde na stránce stejné ruky.
+- Daty bývají svátky (*Dominica*, *festum S. Joannis*) – v nejasných případech dopočítej.
+
+### Slovníček (lat. / něm. → česky)
+| výraz | význam |
+|---|---|
+| *natus / geboren*, *baptisatus / getauft* | narozen, pokřtěn |
+| *copulati / getraut*, *sponsus / Bräutigam*, *sponsa / Braut* | oddáni, ženich, nevěsta |
+| *mortuus, sepultus / gestorben, begraben* | zemřel, pohřben |
+| *legitimus / ehelich*, *illegitimus / unehelich* | manželský, nemanželský |
+| *viduus, vidua / Witwer, Witwe* | vdovec, vdova |
+| *filius, filia / Sohn, Tochter* | syn, dcera |
+| *patrini / Pathen*, *testes / Zeugen*, *obstetrix / Hebamme* | kmotři, svědci, porodní bába |
+| *agricola, rusticus / Bauer* | sedlák, rolník |
+| *Häusler*, *casarius* | domkář |
+| *Inwohner / inquilinus*, *podruh* | podruh (bydlel v cizím domě) |
+| *Gärtner* (na vsi) | zahradník = malý usedlík, ne nutně pěstitel |
+| *Inleute*, *Taglöhner* | podruzi, nádeníci |
+| *Bürger*, *civis* | měšťan |
+| *Schneider / sartor*, *Schuhmacher / sutor*, *Weber / textor*, *Schmied / faber*, *Müller / molitor* | krejčí, švec, tkadlec, kovář, mlynář |
+| *N.* / *No.* / *Haus Nr.* | číslo domu (popisné) |
+| *ex*, *aus*, *von* | z (obce) |
+| *Lungensucht*, *Abzehrung* | souchotiny (TBC) |
+| *Cholera*, *Blattern* | cholera, neštovice |
+| *Fraisen* | křeče (časté u kojenců) |
+
+## Odhad roků
+- Věk při úmrtí/sňatku je často zaokrouhlený o ±2–5 let. Uváděj „asi 1756“ a hledej křest v širším okně.
+- Nevěsta mívala 18–28, ženich 22–32; děti po 1,5–3 letech.
+- „Vdovec“ u ženicha = hledej první manželství a děti z něj.
+
+## Stavy údajů v datech
+| stav | kdy |
+|---|---|
+| `doc` | přečteno přímo na snímku zápisu, který osobu jednoznačně identifikuje |
+| `prob` | silná shoda (jméno, doba, místo, dům, řemeslo), ale bez přímého zápisu; vždy `note` proč |
+| `fam` | od rodiny / z rodinného dokumentu |
+| `mh` | jen z cizího stromu na internetu |
+| `unk` | známe jen místo v rodokmenu |
+
+## Typické pasti (ze skutečného výzkumu)
+- Písař spletl jméno dědečka (Josef místo Václava) – rozhodne více zápisů téže rodiny.
+- Dítě zapsané pod jiným křestním jménem, než jakým ho volala rodina (Františka → v rodině Anna).
+- Sňatek pár měsíců před porodem nebo po něm – není chyba, jen „svatba na poslední chvíli“; zajímavost pro web.
+- Nemanželské dítě nese příjmení matky; otec chybí nebo je dopsán později (legitimace na okraji).
+- Stejný předek dvakrát v rodokmenu (vzdálení příbuzní se vzali) – v datech `SAME`.
+- Index nenašel ≠ zápis neexistuje. Zapiš, co přesně jsi prošel.
+- Pomocníci (subagenti) a OCR/AI čtou historické písmo chybně – vždy ověř sám (viz `playbook.md` §1 bod 10).
