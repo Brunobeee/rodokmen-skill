@@ -22,8 +22,10 @@ s přepisem a překladem, „Co hledáme“ a deník hledání.
 </details>
 
 ## Co budete potřebovat
-- **Claude Code** (aplikace pro Mac/Windows nebo příkazová řádka) a předplatné Claude (Pro/Max). Rodokmen je
-  dlouhá práce – počítejte s několika večery a s tím, že spotřebuje dost kreditů.
+- **Claude Code** (aplikace pro Mac/Windows nebo příkazová řádka) a placené předplatné Claude. Rodokmen je
+  dlouhá práce – počítejte s několika večery a s tím, že spotřebuje dost kreditů. Nejlevnější tarif **Pro bude
+  nejspíš málo** (stačí na vyzkoušení), na celý rodokmen počítejte aspoň s nejnižším tarifem **Max**.
+  Po dokončení můžete předplatné zase snížit nebo zrušit, web i data vám zůstanou.
 - **Počítač s macOS** (vyzkoušeno). Windows a Linux by měly fungovat, ale vyzkoušené nejsou.
 - Programy **Python 3, Node.js, ImageMagick a git**. Nemusíte je instalovat předem – Claude zkontroluje, co chybí,
   a pomůže s instalací (na Macu přes [Homebrew](https://brew.sh)).
