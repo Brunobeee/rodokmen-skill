@@ -96,7 +96,8 @@ def fit(text, avail, fmax, fmin):
 
 
 paths, defs, texts, links = [], [], [], []
-slots = sorted(set(P) | {c for k in P for c in (2 * k, 2 * k + 1) if gen(c) <= 10 and k in P})
+slots = sorted({k for k in P if gen(k) < len(RINGS)} |   # vějíř má 11 prstenců (generace 0–10); starší předky vynech
+               {c for k in P for c in (2 * k, 2 * k + 1) if gen(c) <= 10 and k in P})
 for k in slots:
     g = gen(k)
     r0, r1 = RINGS[g]
