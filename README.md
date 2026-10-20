@@ -1,15 +1,25 @@
 # Rodokmen – skill pro Claude Code
 
+![Rodokmen z matrik a rodinný web – vějíř předků, mapa a zajímavosti](docs/banner.jpg)
+
 Claude vás provede tvorbou rodokmenu **od rodinných vzpomínek přes digitalizované matriky až k hezkému rodinnému webu**
 s vějířem předků, mapou, příběhem rodu a výřezy původních zápisů s přepisem a překladem.
 Je určený pro lidi, kteří genealogii nikdy nedělali a neprogramují – technickou práci dělá Claude, vy dodáváte
 znalost rodiny a rozhodujete.
 
+Vznikl při skutečném hledání předků jedné rodiny (243 předků, 11 generací, 192 matričních zápisů za dva dny).
+
+## Jak vypadá web
+Úvodní stránka ukázkového webu s vymyšlenou rodinou Novákových (260 předků v 11 generacích): příběh rodu, zajímavosti,
+mapa, kde předci žili, osm rodů a vějíř předků. Další stránky: rodokmen po rodinách, karty osob, výřezy zápisů
+s přepisem a překladem, „Co hledáme“ a deník hledání.
+
+<details>
+<summary>Zobrazit celou úvodní stránku</summary>
+
 ![Ukázkový web s vymyšlenou rodinou Novákových: úvod, zajímavosti, mapa, rody a vějíř předků](docs/ukazka-web.png)
 
-*Ukázkový web s vymyšlenou rodinou Novákových.*
-
-Vznikl při skutečném hledání předků jedné rodiny (243 předků, 11 generací, 192 matričních zápisů za dva dny).
+</details>
 
 ## Co budete potřebovat
 - **Claude Code** (aplikace pro Mac/Windows nebo příkazová řádka) a předplatné Claude (Pro/Max). Rodokmen je
