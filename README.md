@@ -97,3 +97,8 @@ Pokud projekt chcete zálohovat na GitHub, použijte **soukromý** repozitář.
 Claude si během práce zapisuje do `poznamky_pro_skill.md` (v projektu), co by šlo ve skillu zlepšit: chyby, nové archivy
 a nápady. Občas vám je nabídne k odeslání. Nic se neposílá samo: když budete chtít, zkopírujte je do e-mailu
 na **sarsonj@gmail.com**. Moc to pomůže.
+
+## Licence
+Skill je pod licencí [MIT](LICENSE): smíte ho volně používat, upravovat a šířit dál, jen zachovejte uvedení autora.
+Výjimkou je metodická příručka `skills/rodokmen/reference/playbook.md`. Je to převzatá rešeršní zpráva bez uvedeného
+autora, licence MIT se na ni nevztahuje (podrobnosti na začátku souboru).

@@ -1,6 +1,9 @@
-<!-- Metodická příručka (anglicky). Kopie Google dokumentu Jindřicha Šaršona, stav 2026-10-09, staženo 2026-10-16.
-Živá verze: https://docs.google.com/document/d/1UTdn4ru86uLo7eo2aXtRMsayvahT5hvLP97waWUxK5Q/edit
-Novější verzi lze stáhnout: curl -sL "https://docs.google.com/document/d/1UTdn4ru86uLo7eo2aXtRMsayvahT5hvLP97waWUxK5Q/export?format=txt"
+<!-- Metodická příručka (anglicky): rešeršní zpráva „Professional Genealogy in the Czech Lands & Central Europe —
+Operating Playbook“, stav 2026-10-09. Autor ve zprávě není uveden. Podle stylu (štítky [FACT]/[INFERENCE], „this run“,
+„via subagent“) jde nejspíš o výstup výzkumného nástroje s umělou inteligencí. Do skillu je zařazena jako pracovní
+podklad, beze změn obsahu a bez nároku na autorství. Licence MIT repozitáře se na tento soubor nevztahuje.
+Jste-li autor a nesouhlasíte se zařazením, ozvěte se prosím na sarsonj@gmail.com – soubor upravíme nebo odstraníme.
+Pozor: jde o rešerši k datu 2026-10-09 – adresy, lhůty a ceny ověř, než se na ně spolehneš.
 Čti po částech podle potřeby (obsah: §0 opravy, §1 hlavní zjištění, §2 prameny po zemích, §3 časová osa, §4 lhůty, §5 metoda a šablony, §6+ nástroje a ceny). -->
 
 # Professional Genealogy in the Czech Lands & Central Europe — Operating Playbook, State of 2026-10-09

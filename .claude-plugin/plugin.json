@@ -2,5 +2,8 @@
   "name": "rodokmen",
   "version": "0.3.0",
   "description": "Rodokmen z českých matrik a rodinný web – průvodce pro začátečníky (česky).",
-  "author": { "name": "Jindřich Šaršon" }
+  "author": {
+    "name": "Jindřich Šaršon"
+  },
+  "license": "MIT"
 }
