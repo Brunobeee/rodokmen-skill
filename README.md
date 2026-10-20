@@ -93,10 +93,14 @@ Projekt obsahuje osobní údaje vaší rodiny. Zůstává na vašem počítači.
 a není indexovaný vyhledávači. Žijící lidé jsou na něm jen se jménem a rokem narození.
 Pokud projekt chcete zálohovat na GitHub, použijte **soukromý** repozitář.
 
-## Zpětná vazba
-Claude si během práce zapisuje do `poznamky_pro_skill.md` (v projektu), co by šlo ve skillu zlepšit: chyby, nové archivy
-a nápady. Občas vám je nabídne k odeslání. Nic se neposílá samo: když budete chtít, zkopírujte je do e-mailu
-na **sarsonj@gmail.com**. Moc to pomůže.
+## Zpětná vazba a vaše zkušenosti
+Budu rád, když se mi ozvete na **sarsonj@gmail.com**: co fungovalo, co ne, jaký archiv jste použili, co vám na webu chybělo.
+Užitečné změny rád zapracuji do skillu, aby je měli k dispozici i ostatní. Další verze tak bude lepší pro každého,
+kdo hledá své předky.
+
+Nemusíte nic sepisovat sami. Claude si během práce zapisuje do `poznamky_pro_skill.md` (v projektu), co by šlo zlepšit:
+chyby, nové archivy, postupy a nápady, bez údajů o vaší rodině. Občas vám je nabídne k odeslání. Nic se neposílá samo:
+když budete chtít, zkopírujte je do e-mailu.
 
 ## Licence
 Skill je pod licencí [MIT](LICENSE): smíte ho volně používat, upravovat a šířit dál, jen zachovejte uvedení autora.
