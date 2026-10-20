@@ -43,7 +43,7 @@ def main():
             shutil.copy2(os.path.join(SKILL, "tools", f), os.path.join(tools, f))   # nástroje vždy aktualizovat
     for d in ("vyrezy", "zdroje", "dokumenty", "pracovni"):
         os.makedirs(os.path.join(dst, d), exist_ok=True)
-    for name in ("CLAUDE.md", ".gitignore"):
+    for name in ("CLAUDE.md", ".gitignore", "poznamky_pro_skill.md"):
         out = os.path.join(dst, name)
         if not os.path.exists(out):
             shutil.copy2(os.path.join(SKILL, "template", name), out)

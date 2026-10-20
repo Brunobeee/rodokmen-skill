@@ -96,6 +96,10 @@ Pravidla, která chrání kvalitu (naučená na skutečném projektu):
 - Matriky před ~1650 skoro nejsou. Pro 17. století: soupis poddaných 1651, berní rula 1654, gruntovní knihy (`reference/portaly.md`).
 - Najdeš-li **spornou věc**, kterou nerozhodneš (dvě možná čtení, dva kandidáti), napiš to uživateli s výřezem
   a nech ho rozhodnout; do té doby `prob`.
+- **Hodně sporných čtení najednou** (desítky po velkém kole) nedávej do chatu po jednom. Sesbírej je do
+  `pracovni/sporna_cteni.json` (klíč zápisu, výřez, otázka, možnosti, tvůj návrh) a udělej z nich jednu stránku,
+  kde uživatel u každého klikne na odpověď. Když to jde, použij artefakt s ukládáním odpovědí, jinak HTML soubor
+  s tlačítkem „stáhnout odpovědi“. Odpovědi pak zapracuj a zapiš do deníku.
 
 ### Pomocníci (subagenti) – šetrně
 Na velké kolo (např. „projdi 5 svazků a najdi všechny Nováky“) můžeš pustit 2–4 pomocníky paralelně.
@@ -105,6 +109,8 @@ a pravidla výše. Pomocník píše jen do `pracovni/pom_<větev>/`, **do `data/
 na dvě čitelné poloviny), než ho zapíšeš jako `doc`. Uživateli to vysvětli správně: pomocníci nečtou hůř, je to stejný
 model. Jde o princip čtyř očí a pomocník nemá kontext (dvě rodiny stejného jména ve vsi, dva Janové na statku).
 Prohlížeč může mít najednou jen jeden pomocník, proto dávej přednost nástrojům bez prohlížeče.
+**Pomocníky spouštěj na levnějším modelu** (Agent s `model: "sonnet"`): hledání a první čtení zvládnou a stojí zlomek
+kreditů. Ověření na snímku a zápis do dat dělá hlavní model (ty). Uživateli to řekni, ať ví, proč kredity tolik neubývají.
 Osvědčilo se 3–4 pomocníci na různé větve a archivy současně, jedno kolo ≈ 15–25 nových předků.
 Pomocníci stojí hodně kreditů – před velkým kolem řekni uživateli, co plánuješ a proč, a nech si to schválit.
 Do zadání jim napiš technické pasti z `reference/matriky.md` (zsh, ImageMagick).
@@ -136,6 +142,23 @@ Výchozí cesta je **Netlify** (zdarma): `npm run nasadit`. Přihlášení k Net
 dej je uživateli jako `! npx netlify-cli login` atd. (postup v `reference/web.md`). Pokročilá varianta: vlastní server (Docker/CapRover).
 Nic nezveřejňuj bez výslovného souhlasu uživatele.
 
+## Poznámky pro správce skillu
+Skill se zlepšuje podle zkušeností lidí, kteří ho používají. Proto **průběžně zapisuj do `poznamky_pro_skill.md`**
+(v kořeni projektu), co by se mělo ve skillu zlepšit:
+- chyby nástrojů a webu (příkaz, co se stalo, co jsi čekal, jak jsi to obešel),
+- nový archiv nebo portál a postup, který fungoval (adresy, pasti, omezení), nástroje, které sis musel napsat sám,
+- místa, kde návod mlčel nebo radil špatně, a co uživatel chtěl, ale skill to neuměl (nápady na web apod.).
+
+Piš obecně a stručně. Zapisuj technický postup, ne údaje o rodině (žádní žijící lidé, žádné citlivé věci).
+**Ve vhodnou chvíli připomeň uživateli, že může poznámky poslat správci skillu**: po zveřejnění webu, na konci velkého
+kola nebo sezení, když je v poznámkách něco podstatného (chyba, nový archiv), a pak zhruba jednou za pár sezení.
+Nedělej to pořád. Postup:
+1. Projdi poznámky a odstraň nebo zobecni osobní údaje.
+2. Vypiš je do chatu celé, jako jeden blok k zkopírování.
+3. Požádej uživatele, ať je zkopíruje a pošle e-mailem na **sarsonj@gmail.com** (předmět třeba „Rodokmen skill – poznámky“).
+**Nic sám neposílej** (žádný e-mail, formulář ani issue). Rozhoduje uživatel. Až řekne, že poslal, zapiš do
+`poznamky_pro_skill.md` „odesláno <datum>“ a další poznámky piš pod tuto čáru.
+
 ## Co nikdy
 - Nestahuj hromadně z placených služeb (MyHeritage, Ancestry, Geni…) a neobcházej jejich ochranu –
   automatické procházení stovek záznamů vede k **zablokování účtu**. Čti jen to, co uživatel otevře, nebo co potřebuješ jednotlivě.
@@ -155,6 +178,7 @@ Nic nezveřejňuj bez výslovného souhlasu uživatele.
 | `data/zajimavosti.md`, `data/pribeh.md`, `data/web.json`, `data/dokumenty.json`, `data/mista.json` | texty a nastavení webu, rodinné fotky, místa na mapě |
 | `vyrezy/`, `zdroje/` | výřezy zápisů a dokumentů (web / plné rozlišení), název = klíč + `.jpg` |
 | `dokumenty/`, `pracovni/` | originály od rodiny; pracovní soubory (nejdou na web) |
+| `poznamky_pro_skill.md` | poznámky pro správce skillu (chyby, nové archivy, nápady) – posílá je uživatel ručně |
 | `tools/` | nástroje (kopie ze skillu; aktualizace: znovu spustit `novy_projekt.py` na stejnou složku) |
 | `web/` | web (Astro); data do něj jdou jen přes `npm run data` |
 
@@ -165,6 +189,8 @@ Nic nezveřejňuj bez výslovného souhlasu uživatele.
 | `aron_img.py <apu> info / <snímek> 1 pracovni/x.jpg / link <n> / svazek` | stáhne snímek, dá odkaz, zapíše svazek |
 | `trebon.py misto / svazky / rejstrik / snimek / svazek` | matriky SOA Třeboň (jižní Čechy) bez prohlížeče, i rejstříky |
 | `ahmp_search.sh "dotaz"`, `ahmp_scan.py XID snímek out.jpg` | matriky Prahy (AHMP) |
+| `policie_prihlasky.py Příjmení [Jméno] [od] [do]` | pražské policejní přihlášky 1850–1914 (rodiny s dětmi a adresami) |
+| `soal_zoomify.py <cesta> 0 out.jpg` | snímek SOA Litoměřice (knihu najdi v prohlížeči; pozor na blokování) |
 | `matricula_dl.sh`, `matricula_batch.sh` | snímky z Matriculy (Rakousko…), URL se bere z prohlížeče |
 | `anno.py`, `anno_snap.py`, `kramerius.py` | noviny: ANNO (rakouské), Kramerius (české) |
 | `ged_import.py strom.ged "Jméno"` | předci z rodinného stromu (GEDCOM) + fronta zápisů |

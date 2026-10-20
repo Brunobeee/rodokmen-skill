@@ -80,13 +80,11 @@ def years(y):
     if not ys:
         return ""
     approx = "≈" if re.match(r"^(asi|≈)", y) else ""
+    if y.startswith(("?", "†")):   # neznámé narození: ukázat jen úmrtí („? – před 1743“ → „† před 1743“)
+        return "† " + ("před " if "před" in y else "") + ys[-1]
     if y.startswith("*"):
         return "* " + ys[0]
-    if y.startswith("†"):
-        return "† " + ys[0]
     if len(ys) == 1:
-        if re.match(r"^\?\s*[–-]", y):   # „? – 1940“ = známé jen úmrtí
-            return "?–" + ys[0]
         return approx + ys[0]
     tail = y.split("–")[-1]
     second = "?" if "před" in tail else ("≈" if re.search(r"(asi|≈)", tail) else "") + ys[-1]
@@ -186,7 +184,8 @@ def main():
         p = P[k]
         if placeholder(p) or k in SAME:
             continue
-        ys = re.findall(r"\d{4}", p.get("y") or "")
+        yv = (p.get("y") or "").strip()
+        ys = [] if yv.startswith(("?", "†")) else re.findall(r"\d{4}", yv)   # rok úmrtí do adresy nedávat
         s = slugify(p["n"] + (" " + ys[0] if ys else ""))
         if s in used or not s:
             s = f"{s}-{k}"

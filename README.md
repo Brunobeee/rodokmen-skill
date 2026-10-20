@@ -72,8 +72,9 @@ skills/rodokmen/
 
 ## Co umí a co ne
 - **Hotové nástroje** (bez prohlížeče) mají: východní Čechy (SOA Zámrsk, ARON), jižní Čechy (SOA Třeboň,
-  včetně dobrovolnických rejstříků) a Prahu (AHMP). Pro Rakousko je postup přes Matriculu.
-- Ostatní archivy (Plzeň, Litoměřice, Brno, Opava) Claude obsluhuje obecným postupem přes prohlížeč.
+  včetně dobrovolnických rejstříků) a Prahu (AHMP a policejní přihlášky 1850–1914). Pro severní Čechy (SOA Litoměřice)
+  stahuje snímky nástrojem, knihu ale najde přes prohlížeč. Pro Rakousko je postup přes Matriculu.
+- Ostatní archivy (Plzeň, Brno, Opava) Claude obsluhuje obecným postupem přes prohlížeč.
   Funguje to, ale je to pomalejší.
 - U úředníků, vojáků a lékařů hledá i v **dobových novinách** (ANNO, Kramerius) – kariéra, vyznamenání, parte.
 - Umí načíst **rodinný strom z MyHeritage** a dalších služeb (export GEDCOM) a udělat z něj plán hledání.
@@ -87,3 +88,8 @@ skills/rodokmen/
 Projekt obsahuje osobní údaje vaší rodiny. Zůstává na vašem počítači. Web je chráněný rodinnou otázkou
 a není indexovaný vyhledávači. Žijící lidé jsou na něm jen se jménem a rokem narození.
 Pokud projekt chcete zálohovat na GitHub, použijte **soukromý** repozitář.
+
+## Zpětná vazba
+Claude si během práce zapisuje do `poznamky_pro_skill.md` (v projektu), co by šlo ve skillu zlepšit: chyby, nové archivy
+a nápady. Občas vám je nabídne k odeslání. Nic se neposílá samo: když budete chtít, zkopírujte je do e-mailu
+na **sarsonj@gmail.com**. Moc to pomůže.

@@ -40,6 +40,8 @@ def years(y):
     if not ys:
         return ""
     approx = "≈" if re.match(r"^(asi|≈)", y) else ""
+    if y.startswith(("?", "†")):   # neznámé narození: ukázat jen úmrtí („? – před 1743“ → „† před 1743“)
+        return "† " + ("před " if "před" in y else "") + ys[-1]
     if y.startswith("*"):
         return "* " + ys[0]
     if len(ys) == 1:
