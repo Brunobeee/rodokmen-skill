@@ -10,11 +10,9 @@ znalost rodiny a rozhodujete.
 Vznikl při skutečném hledání předků jedné rodiny (243 předků, 11 generací, 192 matričních zápisů za dva dny).
 
 ## Jak vypadá web
-Úvodní stránka ukázkového webu s vymyšlenou rodinou Novákových (260 předků v 11 generacích): příběh rodu, zajímavosti,
-mapa, kde předci žili, osm rodů a vějíř předků. Další stránky: rodokmen po rodinách, karty osob, výřezy zápisů
-s přepisem a překladem, „Co hledáme“ a deník hledání.
-
-<p align="center"><a href="docs/ukazka-web.png"><img src="docs/ukazka-web.png" width="700" alt="Ukázkový web s vymyšlenou rodinou Novákových: úvod, zajímavosti, mapa, rody a vějíř předků"></a></p>
+Ukázkový web s vymyšlenou rodinou Novákových (260 předků v 11 generacích) má na úvodní stránce příběh rodu, zajímavosti,
+mapu, kde předci žili, osm rodů a vějíř předků. Další stránky: rodokmen po rodinách, karty osob, výřezy zápisů
+s přepisem a překladem, „Co hledáme“ a deník hledání. **[Podívejte se na celou úvodní stránku ukázky →](docs/ukazka-web.png)**
 
 ## Co budete potřebovat
 - **Claude Code** (aplikace pro Mac/Windows nebo příkazová řádka) a placené předplatné Claude. Rodokmen je
