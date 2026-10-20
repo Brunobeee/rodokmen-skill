@@ -5,6 +5,10 @@ s vějířem předků, mapou, příběhem rodu a výřezy původních zápisů s
 Je určený pro lidi, kteří genealogii nikdy nedělali a neprogramují – technickou práci dělá Claude, vy dodáváte
 znalost rodiny a rozhodujete.
 
+![Ukázkový web s vymyšlenou rodinou Novákových: úvod, zajímavosti, mapa, rody a vějíř předků](docs/ukazka-web.png)
+
+*Ukázkový web s vymyšlenou rodinou Novákových.*
+
 Vznikl při skutečném hledání předků jedné rodiny (243 předků, 11 generací, 192 matričních zápisů za dva dny).
 
 ## Co budete potřebovat

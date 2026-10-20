@@ -69,6 +69,8 @@ def main():
                 err.append(f"zápis {k}: chybí pole '{f}'")
         if z.get("svazek") and z["svazek"] not in svazky:
             err.append(f"zápis {k}: svazek '{z['svazek']}' není v data/svazky.json")
+        if z.get("ukazka"):   # vymyšlený zápis ukázkové rodiny – nemá snímek ani přepis
+            continue
         if not z.get("odkaz") and not svazky.get(z.get("svazek", ""), {}).get("url"):
             warn.append(f"zápis {k}: chybí odkaz na snímek (pole 'odkaz')")
         if not os.path.exists(os.path.join(ROOT, "vyrezy", k + ".jpg")):
