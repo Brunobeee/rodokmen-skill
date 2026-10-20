@@ -102,6 +102,19 @@ Nemusíte nic sepisovat sami. Claude si během práce zapisuje do `poznamky_pro_
 chyby, nové archivy, postupy a nápady, bez údajů o vaší rodině. Občas vám je nabídne k odeslání. Nic se neposílá samo:
 když budete chtít, zkopírujte je do e-mailu.
 
+## Bezpečnost
+Skill je obyčejný text (návod pro Clauda) a pár skriptů v Pythonu. Všechno si můžete před instalací prohlédnout
+tady v repozitáři.
+- **Žádný automaticky spouštěný kód.** Plugin nemá hooky ani MCP servery. Skripty spouští jen Claude, když je
+  při práci potřebuje, a Claude Code se vás na ně zeptá.
+- **Kam skripty sahají:** jen do složky projektu rodokmenu. Na disku nic nemažou ani nepřepisují mimo ni.
+- **Na které servery chodí:** archivní portály (ARON SOA Zámrsk, SOA Třeboň, AHMP, Národní archiv, SOA Litoměřice,
+  Matricula), noviny (ANNO, Kramerius), OpenStreetMap (mapa a souřadnice obcí) a při instalaci webu registr npm.
+  Na Netlify jen tehdy, když web sami zveřejníte. Nikam jinam nic neposílají, ani vaše data, ani poznámky.
+- **Doporučení:** nechte v Claude Code zapnuté schvalování příkazů, aspoň dokud si nezvyknete, co Claude dělá.
+  Obecně instalujte skilly a pluginy jen od lidí, kterým věříte. Skill nikdo předem nekontroluje a Claude se
+  jeho návodem řídí.
+
 ## Licence
 Skill je pod licencí [MIT](LICENSE): smíte ho volně používat, upravovat a šířit dál, jen zachovejte uvedení autora.
 Výjimkou je metodická příručka `skills/rodokmen/reference/playbook.md`. Je to převzatá rešeršní zpráva bez uvedeného
