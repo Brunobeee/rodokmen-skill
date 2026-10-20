@@ -14,12 +14,7 @@ Vznikl při skutečném hledání předků jedné rodiny (243 předků, 11 gener
 mapa, kde předci žili, osm rodů a vějíř předků. Další stránky: rodokmen po rodinách, karty osob, výřezy zápisů
 s přepisem a překladem, „Co hledáme“ a deník hledání.
 
-<details>
-<summary>Zobrazit celou úvodní stránku</summary>
-
-![Ukázkový web s vymyšlenou rodinou Novákových: úvod, zajímavosti, mapa, rody a vějíř předků](docs/ukazka-web.png)
-
-</details>
+<p align="center"><a href="docs/ukazka-web.png"><img src="docs/ukazka-web.png" width="700" alt="Ukázkový web s vymyšlenou rodinou Novákových: úvod, zajímavosti, mapa, rody a vějíř předků"></a></p>
 
 ## Co budete potřebovat
 - **Claude Code** (aplikace pro Mac/Windows nebo příkazová řádka) a placené předplatné Claude. Rodokmen je
