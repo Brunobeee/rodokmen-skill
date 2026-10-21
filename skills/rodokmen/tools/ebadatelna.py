@@ -227,13 +227,13 @@ def matriky(arg):
     if len(out) < celkem:   # víc než 50 výsledků: 100 na stránku a listovat dál
         h = _handler(xml, "resultsOnPagePanel-resultsOnPage")
         if h:
-            obsah, xml = _ajax(h, url, base, {"tableContainer:resultsOnPagePanel:resultsOnPage": "100"})
+            obsah, xml = _ajax(h, url, base.group(1), {"tableContainer:resultsOnPagePanel:resultsOnPage": "100"})
             sber(obsah)
         while len(out) < celkem:
             h = _handler(xml, "pagination-results-nextPageUrl")
             if not h:
                 break
-            obsah, xml = _ajax(h, url, base)
+            obsah, xml = _ajax(h, url, base.group(1))
             if not sber(obsah):
                 break
     return lok, celkem, out
