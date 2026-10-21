@@ -44,7 +44,8 @@ Adresy u nevyzkoušených portálů ověř při prvním použití (portály se m
 
 ## SOA Plzeň (Porta fontium, portafontium.eu) – `tools/portafontium.py`, bez prohlížeče
 - `portafontium.py fara <fara>` → knihy fary: kniha | obce | roky a druhy (`*` N, `oo` O, `+` Z, `i` index) | popis.
-  `<fara>` je část adresy římskokatolické fary bez diakritiky (`dolni-bela` =
+  `<fara>` je název římskokatolické fary („Dolní Bělá“, „Mýto“ – diakritiku nástroj odstraní) nebo přímo část
+  její adresy (`dolni-bela` =
   `…/contents/register/soap-pn/cirkev-rimskokatolicka/dolni-bela`). Obec → faru nástroj nehledá: faru zjisti ve vyhledávání
   matrik na portálu (pole Místo, v prohlížeči) nebo v popisech knih okolních far.
 - `portafontium.py info <kniha>` (`dolni-bela-17`) → signatura, druh, text desky a **obsah** – u knih psaných po vesnicích

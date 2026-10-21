@@ -16,7 +16,7 @@ Použití (z kořene projektu `python3 -I tools/portafontium.py …`, na Windows
 Snímek = pořadové číslo náhledu v prohlížeči portálu (1, 2, 3…). Stránky knih se ukládají do pracovni/.cache_pf/.
 Ber ohled na server: stahuj jen snímky, které čteš.
 """
-import html, http.client, json, os, re, sys, time, urllib.error, urllib.parse, urllib.request
+import html, http.client, json, os, re, sys, time, unicodedata, urllib.error, urllib.parse, urllib.request
 
 BASE = "https://www.portafontium.eu"
 ARCHIV = "soap-pn"
@@ -105,6 +105,8 @@ def snimek(kniha, n, out, nahled=False, crop=None):
 
 def fara(slug):
     slug = slug.strip("/").split("/")[-1]
+    # „Mýto“ → „myto“, „Dolní Bělá“ → „dolni-bela“ (adresa fary na portálu je bez diakritiky)
+    slug = unicodedata.normalize("NFKD", slug).encode("ascii", "ignore").decode().lower().replace(" ", "-")
     url = f"/contents/register/{ARCHIV}/cirkev-rimskokatolicka/{slug}"
     out, n = [], 0
     while True:   # seznam knih je po 40 na stránku
