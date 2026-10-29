@@ -17,7 +17,7 @@ description: Jak vést rodopisný výzkum s mnoha čtenáři najednou (ARON, SOA
 
 ## Limity serverů
 - ARON vydrží asi 6–8 souběžných stahování celkem. Víc (20–40 procesů) ho zahltí a snímek pak trvá desítky minut. Kontrolovat `curl -m 20 https://aron.vychodoceskearchivy.cz/` a procesy `aron_img`.
-- Acta Publica (MZA Brno) nelze stahovat přes curl (HTTP 426). Čte se jen v prohlížeči; hromadné stahování dlaždic skriptem je považováno za obcházení ochrany – nedělat.
+- Acta Publica (MZA Brno): `actapublica.eu` je za ochranou Cloudflare (curl vrací chybu), ale `www.mza.cz/actapublica` jde – používej `tools/mza.py`. Na mza.cz vždy jen **jedno stahování najednou** (při mnoha souběžných připojeních blokuje na 24 h) a stahuj jen snímky, které čteš.
 
 ## Zápis nálezu (pořadí)
 výřez `vyrez.py` → rámeček `ramecek.py` → JSON záznamu a přepisu → `zapis.py` → osoby v `osoby.py` (i prarodiče jako nové Kekulé čísla) → `kontrola.py` → `npm run data` → deník (`research_log.md`) a vedlejší nálezy (`vedlejsi_nalezy.md`).
